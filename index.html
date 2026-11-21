@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>学びに求める価値｜年代・属性別 レーダーチャート＆総合分析</title>
-  <meta name="description" content="就学児（本人・保護者）、中高生（本人・保護者）、大学生、社会人（20・30代／40・50代）、主婦、経営者、高齢者の全10セグメントにおける「学びに求める価値」を公的調査・SNS分析から7項目で可視化したインタラクティブ・レーダーチャートサイト。" />
+  <title>学びに求める価値｜年代・属性別 レーダーチャート＆2035–40未来予測</title>
+  <meta name="description" content="就学児（本人・保護者）、中高生（本人・保護者）、大学生、社会人（20・30代／40・50代）、主婦、経営者、高齢者の全10セグメントにおける「学びに求める価値」を現在（2026）と未来予測（2035–2040）で比較可視化するインタラクティブ・レーダーチャートサイト。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -15,10 +15,11 @@
     <div class="container header-inner">
       <a href="#top" class="brand">
         <span class="brand-mark">学</span>
-        <span>学びに求める価値｜年代別レーダー分析</span>
+        <span>学びに求める価値｜年代別レーダー＆未来予測</span>
       </a>
       <nav class="nav-links" aria-label="ページ内ナビゲーション">
         <a href="#studio">レーダー比較</a>
+        <a href="#future">2035–40未来予測</a>
         <a href="#gallery">10属性一覧</a>
         <a href="#axes">7項目の設計</a>
         <a href="#insights">3大インサイト</a>
@@ -36,15 +37,15 @@
     <!-- Hero -->
     <section class="hero">
       <div class="container">
-        <div class="hero-badge">📊 公的調査 × 民間リサーチ × SNS定性分析</div>
-        <h1>学びに求める価値を、年代・属性別のレーダーチャートで解き明かす</h1>
+        <div class="hero-badge">📊 公的調査 × SNS定性分析 × 🔮 2035–2040 未来予測</div>
+        <h1>学びに求める価値を、年代別レーダーと未来予測で解き明かす</h1>
         <p class="hero-lead">
-          内閣府・文科省・経産省・厚労省の公的統計、ベネッセ・学研・リクルート・パーソル・東京商工会議所・しゅふJOB総研などの実態調査、さらにnoteやSNS（勉強垢・コミュニティラーニング等）のリアルな声を集約。就学児（本人・保護者）、社会人（20・30代／40・50代）から高齢者まで全10セグメントを共通の7軸で比較分析しました。
+          内閣府・文科省・経産省・厚労省の公的統計、ベネッセ・リクルート・パーソル等の調査、SNSのリアルな声に加え、世界経済フォーラム（WEF）・OECD「Education 2030/2040」の予測を統合。全10セグメントの「現在（2026）」と「未来予測（2035–2040）」を共通7軸で比較できます。
         </p>
         <div class="hero-stats">
           <div class="stat-pill"><strong>10</strong><span>属性セグメント（親子・社会人年代分離）</span></div>
           <div class="stat-pill"><strong>7</strong><span>共通評価項目（5段階）</span></div>
-          <div class="stat-pill"><strong>11+</strong><span>公的・民間調査＆SNS動向統合</span></div>
+          <div class="stat-pill"><strong>2026 ⇄ 2035–40</strong><span>現在×未来タイムトラベル比較</span></div>
         </div>
       </div>
     </section>
@@ -56,7 +57,7 @@
           <div>
             <div class="section-eyebrow">Interactive Comparison</div>
             <h2 class="section-title">インタラクティブ・レーダーチャート比較</h2>
-            <p class="section-desc">最大4つの属性を重ね合わせて違いを比較できます。項目ラベルをクリックすると定義とスコア詳細を表示します。</p>
+            <p class="section-desc">「2026 現在」「2035–40 未来予測」「現在 vs 未来 重ね合わせ」を切り替えながら、属性間や時代変化のギャップを直感的に比較できます。</p>
           </div>
           <div style="display:flex; gap:8px; flex-wrap:wrap;">
             <button id="toggle-editor-btn" class="btn btn-sm" type="button">🎛️ スコア調整シミュレーター</button>
@@ -65,7 +66,18 @@
         </div>
 
         <div class="card studio-card">
-          <div class="preset-row">
+          <!-- Era Mode Switcher -->
+          <div class="era-bar">
+            <div class="era-segmented" role="tablist" aria-label="表示する時代モード">
+              <button type="button" class="era-btn is-active" data-era="current">📍 2026 現在</button>
+              <button type="button" class="era-btn is-future" data-era="future">🔮 2035–40 未来予測</button>
+              <button type="button" class="era-btn is-future" data-era="compare">⚡ 現在 vs 未来 重ね合わせ</button>
+            </div>
+            <span class="era-caption" id="era-caption">現在（2026年時点）の調査データで最大4属性を比較表示中</span>
+          </div>
+
+          <!-- Preset Row (shown in current / future modes) -->
+          <div class="preset-row" id="preset-row">
             <div class="preset-group" id="preset-buttons"></div>
             <div style="display:flex; align-items:center; gap:10px;">
               <span id="selected-count" class="panel-meta">選択中: 2 / 最大4</span>
@@ -95,7 +107,7 @@
             <div>
               <div class="panel-block">
                 <div class="panel-head">
-                  <span class="panel-title">比較する属性を選択（最大4つ）</span>
+                  <span class="panel-title" id="selector-panel-title">比較する属性を選択（最大4つ）</span>
                   <span class="panel-meta" id="preset-hint"></span>
                 </div>
                 <div class="segment-selector" id="segment-selector"></div>
@@ -117,54 +129,76 @@
           <div class="editor-panel" id="editor-panel">
             <div class="panel-head" style="margin-bottom:4px;">
               <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-                <span class="panel-title">🎛️ スコア調整シミュレーター（仮説検証用）</span>
+                <span class="panel-title" id="editor-title">🎛️ スコア調整シミュレーター（仮説検証用）</span>
                 <select id="editor-segment-select" class="btn btn-sm" aria-label="編集する属性を選択"></select>
               </div>
               <button id="reset-scores-btn" class="btn btn-sm" type="button">初期データに戻す</button>
             </div>
-            <p class="axis-focus-desc">スライダーを動かすと、自社のターゲット仮説に合わせてレーダーチャート・一覧ギャラリー・スコア表をリアルタイムに更新できます。</p>
+            <p class="axis-focus-desc">スライダーを動かすと、選択中の時代モード（現在 または 2035–40未来予測）のスコアをリアルタイムに仮説検証できます。</p>
             <div class="editor-grid" id="editor-sliders"></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Section 2: 10 Segment Mini Radar Gallery -->
-    <section id="gallery" class="section section-alt">
+    <!-- Section 2: 2035-2040 Future Forecast -->
+    <section id="future" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-eyebrow">2035–2040 Future Forecast</div>
+            <h2 class="section-title">🔮 未来予測：AI・人口構造変化で「学びの価値」はどう変わるか？</h2>
+            <p class="section-desc">世界経済フォーラム（WEF）、OECD「Education 2030/2040」、文科省・経産省の2040年推計から導いた4大ドライバーと、全10属性の未来シフト予測です。</p>
+          </div>
+          <button id="jump-compare-mode-btn" class="btn btn-primary btn-sm" type="button">⚡ 上部レーダーで現在 vs 未来を見る</button>
+        </div>
+
+        <div class="drivers-grid" id="future-drivers-grid"></div>
+
+        <div class="panel-head" style="margin-bottom:12px;">
+          <span class="panel-title" style="font-size:15px;">全10属性の未来シフト一覧（2026 現在 → 2035–40 予測）</span>
+          <span class="panel-meta">カードをクリックすると上部の「現在 vs 未来 重ね合わせ」で確認できます</span>
+        </div>
+        <div class="shift-grid" id="future-shifts-grid"></div>
+      </div>
+    </section>
+
+    <!-- Section 3: 10 Segment Mini Radar Gallery -->
+    <section id="gallery" class="section">
       <div class="container">
         <div class="section-header">
           <div>
             <div class="section-eyebrow">All 10 Profiles</div>
-            <h2 class="section-title">全10属性 ミニレーダー一覧ギャラリー</h2>
-            <p class="section-desc">就学児（本人・保護者）、社会人（20・30代／40・50代）から高齢者までのシルエットを一望できます。気になる属性をそのまま上部レーダーに追加比較できます。</p>
+            <h2 class="section-title">全10属性 ミニレーダー一覧ギャラリー <span id="gallery-era-badge" class="mini-group" style="vertical-align:middle; margin-left:6px;">2026 現在</span></h2>
+            <p class="section-desc">上部の時代モード（現在／未来予測）と連動して全10属性のシルエットを一望できます。</p>
           </div>
         </div>
         <div class="gallery-grid" id="gallery-grid"></div>
       </div>
     </section>
 
-    <!-- Section 3: 7 Axes Design -->
-    <section id="axes" class="section">
+    <!-- Section 4: 7 Axes Design -->
+    <section id="axes" class="section section-alt">
       <div class="container">
         <div class="section-header">
           <div>
             <div class="section-eyebrow">Framework Design</div>
             <h2 class="section-title">レーダーチャート評価項目（7軸）の設計根拠</h2>
-            <p class="section-desc">ビジネス学習の一般的な軸（実利・スキル・教養・人脈）に加え、幼少期・主婦層・シニア層の最重要価値である「成長・非認知能力」と「健康・QOL」を独立軸に据えることで、全ライフステージを漏れなく比較可能にしました。</p>
+            <p class="section-desc">ビジネス学習の一般的な軸（実利・スキル・教養・人脈）に加え、幼少期・主婦層・シニア層、そして2035–40年の最重要価値である「成長・非認知能力」と「健康・QOL」を独立軸に据えています。</p>
           </div>
         </div>
         <div class="axes-grid" id="axes-grid"></div>
       </div>
     </section>
 
-    <!-- Section 4: 3 Insights & Lifecycle U-Curve -->
-    <section id="insights" class="section section-alt">
+    <!-- Section 5: 3 Insights & Lifecycle U-Curve -->
+    <section id="insights" class="section">
       <div class="container">
         <div class="section-header">
           <div>
             <div class="section-eyebrow">Key Findings</div>
             <h2 class="section-title">調査データとSNS分析から見えた3大インサイト</h2>
-            <p class="section-desc">全9属性を横断比較すると、人生を通じた「内発的動機」と「外発的・実利動機」の劇的な入れ替わりと、SNS時代の新しい学びの構造が浮かび上がります。</p>
+            <p class="section-desc">全10属性を横断比較すると、人生を通じた「内発的動機」と「外発的・実利動機」の劇的な入れ替わりと、SNS・AI時代の新しい学びの構造が浮かび上がります。</p>
           </div>
         </div>
 
@@ -182,14 +216,14 @@
           <article class="card insight-card">
             <div class="insight-kicker">INSIGHT 03</div>
             <h3>AI時代、「情報の質」より「つながり・居場所」へ</h3>
-            <p>知識が無料で手に入る現在、中高生の勉強垢、社会人・主婦のコミュニティラーニング、経営者の経営塾（入会理由1位が人脈）、高齢者の地域サロンまで、全世代で「誰と学ぶか（環境・居場所）」が中核価値になっています。</p>
+            <p>知識が無料で手に入る現在、中高生の勉強垢、社会人・主婦のコミュニティラーニング、経営者の経営塾（入会理由1位が人脈）、高齢者の地域サロンまで、全世代で「誰と学ぶか（環境・居場所）」が中核価値になり、2040年にはさらに加速します。</p>
           </article>
         </div>
 
         <div class="card ucurve-card">
           <div class="panel-head" style="margin-bottom:8px;">
             <div>
-              <div class="panel-title">ライフステージ変遷：内発・ウェルビーイング系 vs 実利・スキル系</div>
+              <div class="panel-title">ライフステージ変遷：内発・ウェルビーイング系 vs 実利・スキル系 <span id="ucurve-era-badge" class="mini-group" style="margin-left:6px;">2026 現在</span></div>
               <div class="panel-meta">本人視点の8ステージ（就学児→中高生→大学生→社会人20・30代→社会人40・50代→主婦→経営者→高齢者）における推移</div>
             </div>
             <div style="display:flex; gap:14px; font-size:12px; font-weight:600; flex-wrap:wrap;">
@@ -203,14 +237,14 @@
       </div>
     </section>
 
-    <!-- Section 5: Deep Dive Analysis by Segment -->
-    <section id="deepdive" class="section">
+    <!-- Section 6: Deep Dive Analysis by Segment -->
+    <section id="deepdive" class="section section-alt">
       <div class="container">
         <div class="section-header">
           <div>
             <div class="section-eyebrow">Segment Deep Dive</div>
-            <h2 class="section-title">属性別ディープ分析（調査ファクト × SNS本音 × 企画示唆）</h2>
-            <p class="section-desc">タブを切り替えて、各年代・属性の定量ファクト、SNS上のリアルな声、サービス設計のヒントを確認できます。</p>
+            <h2 class="section-title">属性別ディープ分析（調査ファクト × SNS本音 × 2035–40予測）</h2>
+            <p class="section-desc">タブを切り替えて、各年代・属性の定量ファクト、SNS上のリアルな声、未来シナリオ、サービス設計のヒントを確認できます。</p>
           </div>
         </div>
         <div class="tabs-bar" id="detail-tabs"></div>
@@ -218,16 +252,16 @@
       </div>
     </section>
 
-    <!-- Section 6: Score Matrix & CSV Export -->
-    <section id="matrix" class="section section-alt">
+    <!-- Section 7: Score Matrix & CSV Export -->
+    <section id="matrix" class="section">
       <div class="container">
         <div class="section-header">
           <div>
             <div class="section-eyebrow">Score Matrix</div>
-            <h2 class="section-title">全10属性 × 7項目 スコア一覧表</h2>
-            <p class="section-desc">各項目のヘッダーをクリックするとスコア順にソートできます。企画書やExcel分析用にCSV出力も可能です。</p>
+            <h2 class="section-title">全10属性 × 7項目 スコア一覧表 <span id="matrix-era-badge" class="mini-group" style="vertical-align:middle; margin-left:6px;">2026 現在</span></h2>
+            <p class="section-desc">各項目のヘッダーをクリックするとスコア順にソートできます。CSVには「2026現在」と「2035–40未来予測」の両方を収録して出力します。</p>
           </div>
-          <button id="export-csv-btn" class="btn btn-primary btn-sm" type="button">📥 CSVダウンロード</button>
+          <button id="export-csv-btn" class="btn btn-primary btn-sm" type="button">📥 CSVダウンロード（現在＋未来）</button>
         </div>
         <div class="table-wrap">
           <table class="score-table" id="score-table"></table>
@@ -236,13 +270,13 @@
     </section>
 
     <!-- Sources -->
-    <section class="section">
+    <section class="section section-alt">
       <div class="container">
         <div class="section-header">
           <div>
             <div class="section-eyebrow">References</div>
-            <h2 class="section-title">主な参照調査・情報ソース</h2>
-            <p class="section-desc">本サイトのスコアリングおよび定性分析は、以下の公的統計・民間シンクタンク調査・SNS上の公開動向を統合して作成しています。</p>
+            <h2 class="section-title">主な参照調査・未来予測ソース</h2>
+            <p class="section-desc">本サイトの現在分析および2035–2040未来予測は、以下の国際機関・公的統計・民間シンクタンク調査・SNS上の公開動向を統合して作成しています。</p>
           </div>
         </div>
         <div class="sources-grid" id="sources-grid"></div>
@@ -252,8 +286,8 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div>年代・属性別「学びに求める価値」調査分析サイト — <code>campuswith202512/learning-value</code></div>
-      <div>※各スコアは公的調査の回答傾向およびSNS・メディアの定性情報を5段階（1.0〜5.0）で相対指標化したものです。</div>
+      <div>年代・属性別「学びに求める価値」調査分析＆未来予測サイト — <code>campuswith202512/learning-value</code></div>
+      <div>※現在・未来予測の各スコアは公的・国際機関データおよび定性トレンドを5段階（1.0〜5.0）で相対指標化したモデルです。</div>
     </div>
   </footer>
 
